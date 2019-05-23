@@ -17,4 +17,16 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__ . '/config/last-activity.php' => config_path('last-activity.php'),
         ]);
     }
+
+    /**
+     * Register bindings in the container.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/config/last-activity.php', 'last-activity'
+        );
+    }
 }
