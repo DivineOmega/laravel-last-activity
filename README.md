@@ -1,2 +1,2 @@
-# laravel-last-activity
-Stores the last activity of users within your Laravel application
+# Laravel Last Activity
+Stores the last activity time of users within your Laravel application

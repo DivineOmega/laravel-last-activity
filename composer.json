@@ -1,0 +1,31 @@
+{
+    "name": "divineomega/laravel-last-activity",
+    "description": "Stores the last activity time of users within your Laravel application",
+    "type": "library",
+    "license": "LGPL-3.0-only",
+    "authors": [
+        {
+            "name": "Jordan Hall",
+            "email": "jordan@hall05.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "laravel/framework": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "DivineOmega\\LaravelLastActivity\\": "src/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DivineOmega\\LaravelLastActivity\\ServiceProvider"
+            ]
+        }
+    }
+}
