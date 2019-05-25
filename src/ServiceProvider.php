@@ -15,6 +15,8 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config/last-activity.php' => config_path('last-activity.php'),
+            __DIR__ . '/database/migrations/2019_05_25_151711_add_last_activity_to_users_table.php'
+                => database_path('migrations/2019_05_25_151711_add_last_activity_to_users_table.php')
         ]);
     }
 

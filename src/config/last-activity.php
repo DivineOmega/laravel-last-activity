@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'field' => 'last_activity',
-];
 
+    // Field in which the last activity date time will be stored.
+    'field' => 'last_activity',
+
+];
