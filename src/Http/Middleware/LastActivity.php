@@ -20,15 +20,45 @@ class LastActivity
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-
-            $lastActivityField = config('last-activity.field');
-
-            /** @var Model $user */
             $user = Auth::guard($guard)->user();
-            $user->$lastActivityField = now();
-            $user->save();
+            $this->updateLastActivityField($user);
         }
 
         return $next($request);
+    }
+
+    /**
+     * Updates the last activity field for a specified model.
+     *
+     * @param Model $user
+     */
+    private function updateLastActivityField(Model $user)
+    {
+        $lastActivityField = config('last-activity.field');
+
+        $this->hideFromEvents($user, function() use ($user, $lastActivityField) {
+            $user->$lastActivityField = now();
+            $user->save();
+        });
+    }
+
+    /**
+     * Hides the functionality of a specified callback from the event dispatcher
+     * of the specified modal. This prevents triggering model events and/or observers.
+     *
+     * @param Model $model
+     * @param callable $callback
+     * @return mixed
+     */
+    private function hideFromEvents(Model $model, callable $callback)
+    {
+        $dispatcher = $model::getEventDispatcher();
+        $model::unsetEventDispatcher();
+
+        $result = $callback();
+
+        $model::setEventDispatcher($dispatcher);
+
+        return $result;
     }
 }
