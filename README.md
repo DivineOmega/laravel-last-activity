@@ -14,12 +14,23 @@ composer require divineomega/laravel-last-activity
 
 ## Setup
 
-This package requires you to register a global middleware
-within your `app\Http\Kernel.php` file. Just add the
-line below to your `$middleware` array.
+This package requires you to register middleware within 
+your `app\Http\Kernel.php` file. You will need add the 
+middleware to every middleware group you wish to monitor
+activity for, as shown below.
 
 ```php
-\DivineOmega\LaravelLastActivity\Http\Middleware\LastActivity::class,
+protected $middlewareGroups = [
+        'web' => [
+            /* ... other web middleware ... */
+            \DivineOmega\LaravelLastActivity\Http\Middleware\LastActivity::class
+        ],
+
+        'api' => [
+            /* ... other api middleware ... */
+            \DivineOmega\LaravelLastActivity\Http\Middleware\LastActivity::class
+        ],
+    ];
 ```
 
 You also need to add the config file and migration to your project. 
