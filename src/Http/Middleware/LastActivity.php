@@ -5,7 +5,6 @@ namespace DivineOmega\LaravelLastActivity\Http\Middleware;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LastActivity
 {
