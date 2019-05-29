@@ -54,7 +54,7 @@ via the web or API.
 ## Alternative field name
 
 If you do not wish to use `last_activity` as the field name, this
-can be changed by changing the provide migration. You will also need
+can be changed in the provided migration. You will also need
 to alter the configuration file  
 
 The published configuration file for this package can be found at 
