@@ -5,6 +5,7 @@ namespace DivineOmega\LaravelLastActivity\Http\Middleware;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LastActivity
 {
@@ -17,10 +18,13 @@ class LastActivity
      */
     public function handle($request, Closure $next)
     {
-        $user = $request->user();
+        foreach(array_keys(config('auth.guards')) as $guard) {
 
-        if ($user) {
-            $this->updateLastActivityField($user);
+            $user = Auth::guard($guard)->user();
+
+            if ($user) {
+                $this->updateLastActivityField($user);
+            }
         }
 
         return $next($request);
