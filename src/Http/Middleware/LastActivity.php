@@ -38,6 +38,11 @@ class LastActivity
     private function updateLastActivityField(Model $user)
     {
         $lastActivityField = config('last-activity.field');
+        $graceTime = config('last-activity.grace_time');
+
+        if ($graceTime > 0 && ($user->$lastActivityField)->addSeconds($graceTime) > now()) {
+            return;
+        }
 
         $this->hideFromEvents($user, function() use ($user, $lastActivityField) {
             $user->$lastActivityField = now();
