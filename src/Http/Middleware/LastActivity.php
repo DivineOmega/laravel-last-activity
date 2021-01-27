@@ -35,9 +35,14 @@ class LastActivity
      *
      * @param Model $user
      */
-    private function updateLastActivityField(Model $user)
+    protected function updateLastActivityField(Model $user)
     {
         $lastActivityField = config('last-activity.field');
+        $graceTime = config('last-activity.grace_time');
+
+        if ($graceTime > 0 && $user->$lastActivityField && ($user->$lastActivityField)->addSeconds($graceTime) > now()) {
+            return;
+        }
 
         $this->hideFromEvents($user, function() use ($user, $lastActivityField) {
             $user->$lastActivityField = now();
@@ -53,7 +58,7 @@ class LastActivity
      * @param callable $callback
      * @return mixed
      */
-    private function hideFromEvents(Model $model, callable $callback)
+    protected function hideFromEvents(Model $model, callable $callback)
     {
         $dispatcher = $model::getEventDispatcher();
         $model::unsetEventDispatcher();
