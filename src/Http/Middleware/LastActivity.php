@@ -45,8 +45,10 @@ class LastActivity
         }
 
         $this->hideFromEvents($user, function() use ($user, $lastActivityField) {
+            $user->timestamps = false;
             $user->$lastActivityField = now();
             $user->save();
+            $user->timestamps = true;
         });
     }
 
