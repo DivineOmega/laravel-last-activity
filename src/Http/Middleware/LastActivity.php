@@ -48,6 +48,7 @@ class LastActivity
             $user->timestamps = false;
             $user->$lastActivityField = now();
             $user->save();
+            $user->timestamps = true;
         });
     }
 
