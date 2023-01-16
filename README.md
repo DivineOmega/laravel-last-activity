@@ -12,6 +12,12 @@ project.
 composer require divineomega/laravel-last-activity
 ```
 
+If you are using Laravel < 8.0 or PHP < 8.0 use version 1.3.0.
+
+```bash
+composer require divineomega/laravel-last-activity:"^1.3.0"
+```
+
 ## Setup
 
 This package requires you to register middleware within 
